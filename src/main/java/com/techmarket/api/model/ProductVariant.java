@@ -7,25 +7,23 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "db_product_variant")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-@Entity
-@EntityListeners(AuditingEntityListener.class)
-@Table(name = "db_address")
-public class Address extends Auditable<String>{
+public class ProductVariant extends Auditable<String>{
     @Id
     @GenericGenerator(name = "idGenerator", strategy = "com.techmarket.api.service.id.IdGenerator")
     @GeneratedValue(generator = "idGenerator")
     private Long id;
-    private String address;
-    @ManyToOne
-    private Nation ward;
-    @ManyToOne
-    private Nation district;
-    @ManyToOne
-    private Nation province;
     private String name;
-    private String phone;
+    @Column(columnDefinition = "DOUBLE DEFAULT 0")
+    private Double price;
+    private String color;
+    private String image;
+    private Integer totalStock;
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "product_id")
+    private Product product;
 }

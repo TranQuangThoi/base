@@ -14,6 +14,6 @@ public interface NewsRepository extends JpaRepository<News, Long>, JpaSpecificat
     Boolean existsByTitle(String title);
     @Transactional
     @Modifying
-    @Query(value = "delete FROM db_user_base_news where category_id = :categoryId", nativeQuery = true)
+    @Query(value = "delete FROM db_news where category_id = :categoryId", nativeQuery = true)
     void deleteAllByCategoryId(@Param("categoryId") Long categoryId);
 }

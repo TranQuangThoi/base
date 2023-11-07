@@ -22,6 +22,6 @@ public interface AddressRepository extends JpaRepository<Address,Long>, JpaSpeci
 
     @Transactional
     @Modifying
-    @Query(value = "delete FROM db_user_base_address where user_id in (select id from db_user_base_user where account_id = :accountId)", nativeQuery = true)
+    @Query(value = "delete FROM db_address where user_id in (select id from db_user where account_id = :accountId)", nativeQuery = true)
     void deleteAllByAccountId(@Param("accountId") Long accountId);
 }
