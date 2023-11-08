@@ -100,4 +100,21 @@ public class ErrorCode {
      *
      */
     public static final String  ERROR_DB_QUERY = "ERROR-DB-QUERY-0000";
+
+    /**
+     * Starting error code BRAND_ERROR
+     *
+     */
+    public static final String BRAND_ERROR_NOT_FOUND = "ERROR-BRAND-0000";
+    public static final String BRAND_ERROR_EXIST = "ERROR-BRAND-0001";
+    public static final String BRAND_ERROR_NAME_EXIST = "ERROR-BRAND-0002";
+
+    /**
+     * Starting error code PRODUCT_EROR
+     *
+     */
+
+    public static final String PRODUCT_ERROR_NOT_FOUND = "ERROR-PRODUCT-0000";
+    public static final String PRODUCT_ERROR_EXIST = "ERROR-PRODUCT-0001";
+
 }

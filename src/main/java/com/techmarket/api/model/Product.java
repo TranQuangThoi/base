@@ -31,7 +31,7 @@ public class Product extends Auditable<String>{
     @JoinColumn(name = "brand_id")
     private Brand brand;
     @ManyToOne
-    @JoinColumn(name = "product_cate_id")
-    private ProductCate productCate;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 }
