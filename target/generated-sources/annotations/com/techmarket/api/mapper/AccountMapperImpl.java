@@ -3,6 +3,7 @@ package com.techmarket.api.mapper;
 import com.techmarket.api.dto.account.AccountAutoCompleteDto;
 import com.techmarket.api.dto.account.AccountDto;
 import com.techmarket.api.form.user.SignUpUserForm;
+import com.techmarket.api.form.user.UpdateMyprofile;
 import com.techmarket.api.form.user.UpdateUserForm;
 import com.techmarket.api.model.Account;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-07T07:55:15+0700",
+    date = "2023-11-08T13:05:19+0700",
     comments = "version: 1.3.1.Final, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
 )
 @Component
@@ -108,6 +109,26 @@ public class AccountMapperImpl implements AccountMapper {
         }
         if ( updateUserForm.getEmail() != null ) {
             account.setEmail( updateUserForm.getEmail() );
+        }
+    }
+
+    @Override
+    public void fromUpdateMyProfileToEntity(UpdateMyprofile updateMyprofile, Account account) {
+        if ( updateMyprofile == null ) {
+            return;
+        }
+
+        if ( updateMyprofile.getAvatarPath() != null ) {
+            account.setAvatarPath( updateMyprofile.getAvatarPath() );
+        }
+        if ( updateMyprofile.getFullName() != null ) {
+            account.setFullName( updateMyprofile.getFullName() );
+        }
+        if ( updateMyprofile.getPhone() != null ) {
+            account.setPhone( updateMyprofile.getPhone() );
+        }
+        if ( updateMyprofile.getEmail() != null ) {
+            account.setEmail( updateMyprofile.getEmail() );
         }
     }
 

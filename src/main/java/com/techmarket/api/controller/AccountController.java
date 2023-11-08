@@ -239,6 +239,7 @@ public class AccountController extends ABasicController{
         Account account = accountRepository.findAccountByEmail(forgetForm.getEmail());
         if (account == null) {
             apiMessageDto.setResult(false);
+            apiMessageDto.setMessage("Not found email");
             apiMessageDto.setCode(ErrorCode.ACCOUNT_ERROR_NOT_FOUND);
             return apiMessageDto;
         }

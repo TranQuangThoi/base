@@ -8,6 +8,7 @@ import com.techmarket.api.dto.user.UserAutoCompleteDto;
 import com.techmarket.api.dto.user.UserDto;
 import com.techmarket.api.form.user.SignUpUserForm;
 import com.techmarket.api.form.user.LoginForm;
+import com.techmarket.api.form.user.UpdateMyprofile;
 import com.techmarket.api.form.user.UpdateUserForm;
 import com.techmarket.api.mapper.AccountMapper;
 import com.techmarket.api.mapper.UserMapper;
@@ -37,7 +38,7 @@ import java.util.List;
 @RequestMapping("/v1/user")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @Slf4j
-public class UserController {
+public class UserController extends ABasicController{
 
     @Autowired
     private UserRepository userRepository;
@@ -241,6 +242,68 @@ public class UserController {
         return apiMessageDto;
     }
 
+    @PutMapping(value = "/update-profile", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiMessageDto<String> updateProfile(@Valid @RequestBody UpdateMyprofile updateMyprofile , BindingResult bindingResult)
+    {
+        // get account id
+        Long accountId = getCurrentUser();
+
+        ApiMessageDto<String> apiMessageDto = new ApiMessageDto<>();
+        Account account = accountRepository.findById(accountId).orElse(null);
+        if (account==null)
+        {
+            apiMessageDto.setResult(false);
+            apiMessageDto.setMessage("Not found this account");
+            apiMessageDto.setCode(ErrorCode.ACCOUNT_ERROR_NOT_FOUND);
+            return apiMessageDto;
+        }
+        User user = userRepository.findByAccountId(accountId).orElse(null);
+
+        if (!account.getPhone().equalsIgnoreCase(updateMyprofile.getPhone()))
+        {
+            Account phoneExist = accountRepository.findAccountByPhone(updateMyprofile.getPhone());
+            if (phoneExist!=null)
+            {
+                apiMessageDto.setResult(false);
+                apiMessageDto.setMessage("Phone already exist");
+                apiMessageDto.setCode(ErrorCode.ACCOUNT_ERROR_PHONE_EXIST);
+                return apiMessageDto;
+            }
+        }
+        if (!account.getEmail().equalsIgnoreCase(updateMyprofile.getEmail()))
+        {
+            Account emailExist = accountRepository.findAccountByEmail(updateMyprofile.getEmail());
+            if (emailExist!=null)
+            {
+                apiMessageDto.setResult(false);
+                apiMessageDto.setMessage("Email already exist");
+                apiMessageDto.setCode(ErrorCode.ACCOUNT_ERROR_EMAIL_EXIST);
+                return apiMessageDto;
+            }
+        }
+        if (!passwordEncoder.matches(updateMyprofile.getOldPassword(),account.getPassword()))
+        {
+            apiMessageDto.setResult(false);
+            apiMessageDto.setMessage("password is incorrect");
+            apiMessageDto.setCode(ErrorCode.USER_ERROR_WRONG_PASSWORD);
+            return apiMessageDto;
+        }
+        if (StringUtils.isNoneBlank(updateMyprofile.getNewPassword()))
+        {
+            account.setPassword(passwordEncoder.encode(updateMyprofile.getNewPassword()));
+        }
+
+        if (updateMyprofile.getBirthday()!=null)
+        {
+            user.setBirthday(updateMyprofile.getBirthday());
+        }
+
+        accountMapper.fromUpdateMyProfileToEntity(updateMyprofile,account);
+        accountRepository.save(account);
+        userRepository.save(user);
+        apiMessageDto.setMessage("update myprofile success");
+        return apiMessageDto;
+    }
 
 
 

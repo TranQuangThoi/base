@@ -3,6 +3,7 @@ package com.techmarket.api.mapper;
 import com.techmarket.api.dto.account.AccountAutoCompleteDto;
 import com.techmarket.api.dto.account.AccountDto;
 import com.techmarket.api.form.user.SignUpUserForm;
+import com.techmarket.api.form.user.UpdateMyprofile;
 import com.techmarket.api.form.user.UpdateUserForm;
 import com.techmarket.api.model.Account;
 import org.mapstruct.*;
@@ -51,6 +52,14 @@ public interface AccountMapper {
     @Mapping(source = "avatarPath",target = "avatarPath")
     @BeanMapping(ignoreByDefault = true)
     void fromUpdateUserFormToEntity(UpdateUserForm updateUserForm, @MappingTarget Account account );
+
+
+    @Mapping(source = "phone",target = "phone")
+    @Mapping(source = "email",target = "email")
+    @Mapping(source = "fullName",target = "fullName")
+    @Mapping(source = "avatarPath",target = "avatarPath")
+    @BeanMapping(ignoreByDefault = true)
+    void fromUpdateMyProfileToEntity(UpdateMyprofile updateMyprofile, @MappingTarget Account account );
 
 
 

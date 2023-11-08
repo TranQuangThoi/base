@@ -27,6 +27,8 @@ public class ErrorCode {
     public static final String ACCOUNT_ERROR_MERCHANT_LOGIN_WRONG_STORE = "ERROR-ACCOUNT-0010";
     public static final String ACCOUNT_ERROR_MERCHANT_SERVICE_NOT_REGISTER = "ERROR-ACCOUNT-0011";
     public static final String ACCOUNT_ERROR_NOT_ALLOW_DELETE_SUPPER_ADMIN = "ERROR-ACCOUNT-0012";
+    public static final String ACCOUNT_ERROR_PHONE_EXIST = "ERROR-ACCOUNT-0013";
+    public static final String ACCOUNT_ERROR_EMAIL_EXIST = "ERROR-ACCOUNT-00014";
 
 
     /**
@@ -89,6 +91,9 @@ public class ErrorCode {
     public static final String USER_ERROR_EXIST = "ERROR-USER-0000";
     public static final String USER_ERROR_NOT_FOUND = "ERROR-USER-0001";
     public static final String USER_ERROR_LOGIN_FAILED = "ERROR-USER-0002";
+    public static final String USER_ERROR_WRONG_PASSWORD = "ERROR-USER-0003";
+
+
 
     /**
      * Starting error code DATABASE_ERROR
