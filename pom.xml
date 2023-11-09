@@ -6,8 +6,8 @@
 	<groupId>com.techmarket.api</groupId>
 	<artifactId>tech_martket</artifactId>
 	<version>0.0.1</version>
-	<name>user-base-service</name>
-	<description>User Base Authentication</description>
+	<name>tech-base-service</name>
+	<description>Tech market</description>
 
 	<properties>
 		<java.version>11</java.version>
